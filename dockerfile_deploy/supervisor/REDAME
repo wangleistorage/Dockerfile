@@ -1,0 +1,14 @@
+#!/bin/bash
+#build docker images
+docker build -t centos7-supervisor:latest .
+
+#run docker images
+docker run \
+       -d \
+       -p 220:22 \
+       -p 800:80 \
+       --name supervisor \
+       --restart always \
+       -e TZ=Asia/Shanghai \
+       centos7-supervisor:latest
+       

@@ -1,0 +1,16 @@
+#!/bin/bash
+#build docker images
+docker build -t centos7-jenkins:latest .
+
+#run docker images
+docker run \
+       -d \
+       -p 222:22 \
+       -p 8080:8080 \
+       --name jenkins \
+       --restart always \
+       -v /data/jenkins_data:/data/jenkins \
+       -v /data/jenkins_logs:/usr/local/jenkins/logs \
+       -e TZ=Asia/Shanghai \
+       centos7-jenkins:latest
+       

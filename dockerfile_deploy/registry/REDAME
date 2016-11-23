@@ -1,0 +1,14 @@
+#!/bin/bash
+#run docker images
+docker run \
+       -d \
+       -p 5000:5000 \
+       --name registry \
+       --restart always \
+       -e TZ=Asia/Shanghai \
+       -v /data/registry_data:/var/lib/registry \
+       daocloud.io/registry
+
+# 重要：默认情况下，会将仓库存放于容器的/var/lib/registry目录下，这样如果容器被删除，则存放于容器中的镜像也会丢失，所以我们一般情况下会指定本地一个目录挂载到容器的/data/registry_data下， 两个目录下都有！
+#·registry的默认存储路径是/tmp/registry，只是个临时目录，一段时间之后就会消失
+#·所以使用-v参数，指定个本地持久的路径。

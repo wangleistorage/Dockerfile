@@ -1,0 +1,12 @@
+#!/bin/bash
+#build docker images
+docker build -t centos7-project:latest .
+
+#run docker images
+docker run \
+       -d -P \
+       --name project \
+       --restart always \
+       -v /data/project_logs:/usr/local/tomcat/logs \
+       -e TZ=Asia/Shanghai \
+       centos7-project:latest

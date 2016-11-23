@@ -1,0 +1,12 @@
+#!/bin/bash
+#build docker images
+docker build -t centos7-tomcat:latest .
+
+#run docker images
+docker run \
+       -d -P \
+       --name tomcat \
+       --restart always \
+       -e TZ=Asia/Shanghai \
+       centos7-tomcat:latest
+       

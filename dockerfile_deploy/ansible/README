@@ -1,0 +1,13 @@
+#!/bin/bash
+#build docker images
+docker build -t centos7-ansible:latest .
+
+#run docker images
+docker run \
+       -d \
+       -p 223:22 \
+       --name ansible \
+       --restart always \
+       -e TZ=Asia/Shanghai \
+       -v /data/ansible_data:/root/ansible_playbooks \
+       centos7-ansible:latest

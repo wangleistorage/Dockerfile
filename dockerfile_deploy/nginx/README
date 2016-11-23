@@ -1,0 +1,15 @@
+#!/bin/bash
+#build docker images
+docker build -t centos7-nginx-registry .
+
+#run docker images
+docker run \
+       -d \
+       -p 224:22 \
+       -p 80:80 \
+       -p 443:443 \
+       --name nginx-registry \
+       --restart always \
+       -e TZ=Asia/Shanghai \
+       centos7-nginx-registry
+
